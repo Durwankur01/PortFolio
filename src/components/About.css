@@ -1,0 +1,229 @@
+.about {
+    background: var(--bg-secondary);
+    position: relative;
+}
+
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-12);
+}
+
+/* Main Content */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+}
+
+.about-intro h2 {
+    font-size: var(--fs-3xl);
+    margin-bottom: var(--space-4);
+}
+
+.about-lead {
+    font-size: var(--fs-xl);
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.about-lead em {
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 500;
+}
+
+.about-philosophy p {
+    font-size: var(--fs-base);
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-4);
+}
+
+.about-philosophy p:last-child {
+    margin-bottom: 0;
+}
+
+/* Approach Section */
+.about-approach h3 {
+    font-size: var(--fs-lg);
+    margin-bottom: var(--space-5);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+.approach-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+}
+
+.approach-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    transition: all var(--transition-base);
+}
+
+.approach-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.approach-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-glow);
+    border-radius: var(--radius-md);
+    color: var(--accent);
+    margin-bottom: var(--space-3);
+}
+
+.approach-card h4 {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+}
+
+.approach-card p {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Sidebar */
+.about-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.about-snapshot {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-snapshot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, #8b5cf6 50%, #10b981 100%);
+}
+
+.about-snapshot h3 {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-5);
+}
+
+.snapshot-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.snapshot-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--space-3);
+    border-bottom: 1px dashed var(--border-subtle);
+}
+
+.snapshot-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.snapshot-item dt {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+}
+
+.snapshot-item dd {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.about-quote {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+}
+
+.about-quote blockquote {
+    font-size: var(--fs-sm);
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: var(--space-2);
+}
+
+.about-quote cite {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    font-style: normal;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
+
+    .about-sidebar {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .about-snapshot,
+    .about-quote {
+        flex: 1;
+        min-width: 280px;
+    }
+}
+
+@media (max-width: 640px) {
+    .approach-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .about-sidebar {
+        flex-direction: column;
+    }
+
+    .about-snapshot,
+    .about-quote {
+        min-width: auto;
+    }
+}

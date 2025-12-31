@@ -1,0 +1,129 @@
+.skills {
+    background: var(--bg-secondary);
+    position: relative;
+}
+
+.skills::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-6);
+}
+
+.skill-category {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    transition: all var(--transition-base);
+}
+
+.skill-category:hover {
+    border-color: var(--category-color, var(--accent));
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.skill-category-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--category-glow, var(--accent-glow));
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-4);
+    color: var(--category-color, var(--accent));
+}
+
+.skill-category-title {
+    font-size: var(--fs-base);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+    color: var(--text-primary);
+}
+
+.skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-sm);
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.skill-item:hover {
+    color: var(--text-primary);
+    background: var(--bg-card-hover);
+}
+
+.skill-item-icon {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Category colors */
+.skill-category[data-category="languages"] {
+    --category-color: #3b82f6;
+    --category-glow: rgba(59, 130, 246, 0.15);
+}
+
+.skill-category[data-category="backend"] {
+    --category-color: #10b981;
+    --category-glow: rgba(16, 185, 129, 0.15);
+}
+
+.skill-category[data-category="databases"] {
+    --category-color: #f59e0b;
+    --category-glow: rgba(245, 158, 11, 0.15);
+}
+
+.skill-category[data-category="tools"] {
+    --category-color: #8b5cf6;
+    --category-glow: rgba(139, 92, 246, 0.15);
+}
+
+.skill-category[data-category="concepts"] {
+    --category-color: #ec4899;
+    --category-glow: rgba(236, 72, 153, 0.15);
+}
+
+@media (max-width: 1200px) {
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
