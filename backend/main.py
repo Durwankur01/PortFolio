@@ -10,9 +10,7 @@ app = FastAPI(title="Portfolio API", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://durwankur-portfolio.onrender.com",  # Production frontend
-        "http://localhost:5173",  # Vite dev server
-        "http://localhost:3000",  # Alternative dev port
+        "*",  # Allow all origins for now - can be restricted later
     ],
     allow_credentials=True,
     allow_methods=["*"],

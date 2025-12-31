@@ -1,5 +1,5 @@
 const API_BASE_URL = import.meta.env.PROD 
-    ? 'https://durwankur-portfolio-backend.onrender.com'
+    ? 'https://portfolio-backend-7n91.onrender.com'
     : (import.meta.env.VITE_API_URL || 'http://localhost:8000')
 
 /**
