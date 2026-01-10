@@ -1,11 +1,16 @@
 .projects {
     background: var(--bg-primary);
+    /* Ensure no horizontal overflow */
+    overflow-x: hidden;
 }
 
 .projects-list {
     display: flex;
     flex-direction: column;
     gap: var(--space-12);
+    /* Ensure proper content containment */
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Expanded Project Card */
@@ -146,6 +151,9 @@
     padding: var(--space-3) var(--space-4);
     margin-bottom: var(--space-4);
     overflow-x: auto;
+    /* Ensure proper text wrapping on mobile */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .architecture-flow code {
@@ -153,6 +161,8 @@
     font-size: var(--fs-sm);
     color: var(--accent);
     white-space: nowrap;
+    /* Allow wrapping on mobile */
+    word-break: break-all;
 }
 
 .architecture-layers {
@@ -167,6 +177,8 @@
     gap: var(--space-3);
     padding: var(--space-2) 0;
     border-bottom: 1px dashed var(--border-subtle);
+    /* Ensure content doesn't overflow */
+    min-width: 0;
 }
 
 .architecture-layer:last-child {
@@ -177,11 +189,18 @@
     font-size: var(--fs-sm);
     font-weight: 600;
     color: var(--project-color, var(--accent));
+    /* Prevent text overflow */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .layer-detail {
     font-size: var(--fs-sm);
     color: var(--text-muted);
+    /* Ensure proper text wrapping */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.6;
 }
 
 /* Decisions List */
@@ -198,6 +217,10 @@
     font-size: var(--fs-sm);
     color: var(--text-secondary);
     line-height: 1.6;
+    /* Ensure proper text wrapping */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .decisions-list li::before {
@@ -328,6 +351,7 @@
 @media (max-width: 1024px) {
     .project-card-content {
         grid-template-columns: 1fr;
+        gap: var(--space-6);
     }
 
     .project-sidebar {
@@ -339,21 +363,151 @@
 }
 
 @media (max-width: 768px) {
+    .projects-list {
+        gap: var(--space-8);
+    }
+
     .project-card-header {
         flex-wrap: wrap;
         padding: var(--space-5);
+        gap: var(--space-4);
     }
 
     .project-number {
         font-size: var(--fs-2xl);
+        order: 1;
+    }
+    
+    .project-icon-large {
+        order: 2;
+        width: 48px;
+        height: 48px;
+    }
+    
+    .project-icon-large svg {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .project-title-block {
+        order: 3;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .project-title {
+        font-size: var(--fs-xl);
     }
 
     .project-card-content {
         padding: var(--space-5);
+        gap: var(--space-5);
+        /* Fix overflow issues on mobile */
+        overflow: visible;
+        min-width: 0;
     }
 
     .architecture-layer {
         grid-template-columns: 1fr;
         gap: var(--space-1);
+        padding: var(--space-3) 0;
+    }
+    
+    .layer-name {
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+    
+    /* Fix text wrapping and overflow issues */
+    .architecture-flow {
+        overflow-x: visible;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .architecture-flow code {
+        white-space: pre-wrap;
+        word-break: break-all;
+        font-size: var(--fs-xs);
+    }
+    
+    .layer-detail {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    /* Improve mobile readability */
+    .project-section-title {
+        font-size: var(--fs-sm);
+        margin-bottom: var(--space-4);
+    }
+    
+    .project-section p {
+        font-size: var(--fs-sm);
+        line-height: 1.8;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    /* Better mobile spacing for features and tech */
+    .project-features {
+        gap: var(--space-3);
+    }
+    
+    .project-feature {
+        font-size: var(--fs-sm);
+        line-height: 1.6;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .project-tech {
+        gap: var(--space-2);
+    }
+    
+    .project-tech-tag {
+        font-size: var(--fs-xs);
+        padding: var(--space-2) var(--space-3);
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* Fix sidebar content wrapping */
+    .project-sidebar {
+        min-width: 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .project-learnings p,
+    .project-future p {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-card-header {
+        padding: var(--space-4);
+        text-align: center;
+    }
+    
+    .project-number {
+        font-size: var(--fs-xl);
+    }
+    
+    .project-title {
+        font-size: var(--fs-lg);
+    }
+    
+    .project-subtitle {
+        font-size: var(--fs-sm);
+    }
+    
+    .project-card-content {
+        padding: var(--space-4);
     }
 }

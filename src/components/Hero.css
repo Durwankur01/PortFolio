@@ -115,18 +115,20 @@
 
 @media (max-width: 1024px) {
     .hero {
-        padding-top: calc(var(--nav-height) + var(--space-12));
+        padding-top: calc(var(--nav-height) + var(--space-8));
+        min-height: 90vh; /* Slightly shorter on tablets */
     }
 
     .hero-container {
         flex-direction: column;
         text-align: center;
         justify-content: center;
+        padding: 0 var(--space-6);
     }
 
     .hero-content {
         text-align: center;
-        margin-bottom: var(--space-12);
+        margin-bottom: var(--space-8);
     }
 
     .hero-cta {
@@ -135,26 +137,63 @@
 }
 
 @media (max-width: 768px) {
+    .hero {
+        padding-top: calc(var(--nav-height) + var(--space-6));
+        min-height: 85vh; /* Optimize for mobile viewport */
+    }
+    
+    .hero-container {
+        padding: 0 var(--space-4);
+        gap: var(--space-8);
+    }
+
     .hero-name {
         font-size: var(--fs-4xl);
+        margin-bottom: var(--space-5);
     }
 
     .hero-headline {
         font-size: var(--fs-lg);
+        margin-bottom: var(--space-6);
+    }
+    
+    .hero-description {
+        font-size: var(--fs-base);
+        margin-bottom: var(--space-8);
+        max-width: none; /* Remove width constraint on mobile */
     }
 
     .hero-cta {
         flex-direction: column;
-        gap: var(--space-3);
+        gap: var(--space-4);
+        width: 100%;
     }
 
     .hero-cta .btn {
         width: 100%;
+        max-width: 280px; /* Prevent buttons from being too wide */
+    }
+    
+    .hero-badge {
+        font-size: var(--fs-xs);
+        padding: var(--space-2) var(--space-3);
+    }
+    
+    .hero-scroll {
+        bottom: var(--space-6);
     }
 }
 
 @media (max-width: 480px) {
     .hero-name {
         font-size: var(--fs-3xl);
+    }
+    
+    .hero-headline {
+        font-size: var(--fs-base);
+    }
+    
+    .hero-description {
+        font-size: var(--fs-sm);
     }
 }

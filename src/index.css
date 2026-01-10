@@ -84,6 +84,8 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--nav-height);
+  /* Prevent horizontal scrolling on mobile */
+  overflow-x: hidden;
 }
 
 body {
@@ -94,6 +96,10 @@ body {
   background-color: var(--bg-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent horizontal scrolling on mobile */
+  overflow-x: hidden;
+  /* Improve touch scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
 img {
@@ -139,11 +145,15 @@ p {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--space-6);
+  /* Prevent horizontal overflow */
+  overflow-x: hidden;
 }
 
 /* Section */
 .section {
   padding: var(--space-24) 0;
+  /* Prevent horizontal overflow */
+  overflow-x: hidden;
 }
 
 .section-header {
@@ -175,6 +185,8 @@ p {
   font-weight: 500;
   border-radius: var(--radius-md);
   transition: all var(--transition-base);
+  min-height: 44px; /* Ensure minimum touch target size */
+  text-align: center;
 }
 
 .btn-primary {
@@ -200,6 +212,15 @@ p {
   transform: translateY(-2px);
 }
 
+/* Mobile button improvements */
+@media (max-width: 768px) {
+  .btn {
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--fs-base);
+    min-height: 48px; /* Larger touch targets on mobile */
+  }
+}
+
 /* Cards */
 .card {
   background: var(--bg-card);
@@ -214,6 +235,17 @@ p {
   border-color: var(--text-muted);
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
+}
+
+/* Mobile card improvements */
+@media (max-width: 768px) {
+  .card {
+    padding: var(--space-5);
+  }
+  
+  .card:hover {
+    transform: translateY(-2px); /* Reduce hover transform on mobile */
+  }
 }
 
 /* Tags */
@@ -276,12 +308,78 @@ p {
   animation: fadeIn 0.6s ease forwards;
 }
 
+/* Mobile-specific utilities */
+@media (max-width: 768px) {
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* Improve focus visibility on mobile */
+  *:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  
+  /* Better text selection on mobile */
+  ::selection {
+    background: var(--accent-glow);
+    color: var(--accent);
+  }
+  
+  /* Ensure all text content wraps properly on mobile */
+  * {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Prevent horizontal scrolling */
+  .container,
+  .section,
+  .card,
+  .project-card-expanded,
+  .project-card-content,
+  .project-main,
+  .project-sidebar {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  /* Better mobile typography */
+  p, li, span, div {
+    hyphens: auto;
+    word-break: break-word;
+  }
+  
+  /* Ensure code blocks don't cause horizontal scroll */
+  code, pre {
+    word-break: break-all;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+  }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   :root {
     --fs-5xl: 2.25rem;
     --fs-3xl: 1.5rem;
     --fs-xl: 1.125rem;
+    
+    /* Increase mobile spacing for better readability */
+    --space-4: 1.25rem;
+    --space-6: 1.75rem;
+    --space-8: 2.25rem;
+    --space-12: 3.5rem;
+    --space-16: 4.5rem;
+    --space-20: 5.5rem;
+    --space-24: 6.5rem;
   }
   
   .section {
@@ -291,11 +389,33 @@ p {
   .container {
     padding: 0 var(--space-4);
   }
+  
+  /* Improve mobile typography */
+  body {
+    line-height: 1.7;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.4;
+  }
+  
+  p {
+    line-height: 1.8;
+  }
 }
 
 @media (max-width: 480px) {
   :root {
     --fs-5xl: 1.875rem;
     --fs-3xl: 1.25rem;
+    
+    /* Even more generous spacing on small screens */
+    --space-4: 1.5rem;
+    --space-6: 2rem;
+    --space-8: 2.5rem;
+  }
+  
+  .container {
+    padding: 0 var(--space-3);
   }
 }

@@ -31,7 +31,7 @@ function Navigation() {
                 </a>
 
                 <button
-                    className="nav-mobile-toggle"
+                    className={`nav-mobile-toggle ${isMenuOpen ? 'open' : ''}`}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     aria-label="Toggle navigation menu"
                 >

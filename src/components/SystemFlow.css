@@ -38,17 +38,51 @@
         right: 0;
         transform: none;
         width: 100%;
-        height: 600px;
+        height: 400px; /* Reduced height for better mobile integration */
         order: -1;
-        opacity: 0.8;
-        margin-top: var(--space-8);
+        opacity: 0.7;
+        margin-bottom: var(--space-6); /* Better spacing with content below */
+        /* Better integration with hero content */
+        background: radial-gradient(circle at center, rgba(59, 130, 246, 0.05) 0%, transparent 60%);
+        border-radius: var(--radius-xl);
     }
 }
 
 @media (max-width: 768px) {
     .system-flow-container {
-        height: 450px;
-        opacity: 0.75;
+        height: 300px; /* Even smaller on mobile phones */
+        opacity: 0.6;
+        margin-bottom: var(--space-4);
+        /* Hide on very small screens to prevent clutter */
+        display: block;
+    }
+    
+    .engineering-overlay {
+        display: none; /* Hide technical overlay on mobile */
+    }
+    
+    .system-flow-status {
+        font-size: 9px;
+        padding: var(--space-2) var(--space-3);
+        bottom: var(--space-3);
+        right: var(--space-3);
+    }
+    
+    .status-text {
+        font-size: 8px;
+    }
+    
+    .status-micro {
+        font-size: 7px;
+    }
+}
+
+@media (max-width: 480px) {
+    .system-flow-container {
+        height: 250px; /* Compact size for small phones */
+        margin-bottom: var(--space-3);
+        /* Consider hiding on very small screens */
+        display: none; /* Hide 3D model on very small screens to focus on content */
     }
 }
 

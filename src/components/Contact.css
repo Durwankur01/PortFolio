@@ -181,10 +181,106 @@
     }
 }
 
+@media (max-width: 768px) {
+    .contact-info h2 {
+        font-size: var(--fs-2xl);
+        margin-bottom: var(--space-3);
+    }
+    
+    .contact-info > p {
+        font-size: var(--fs-base);
+        margin-bottom: var(--space-6);
+        line-height: 1.7;
+    }
+    
+    .contact-links {
+        gap: var(--space-3);
+    }
+    
+    .contact-link {
+        padding: var(--space-4);
+        gap: var(--space-3);
+    }
+    
+    .contact-link:hover {
+        transform: translateX(4px); /* Reduce transform on mobile */
+    }
+    
+    .contact-link-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .contact-link-content h4 {
+        font-size: var(--fs-sm);
+    }
+    
+    .contact-link-content p {
+        font-size: var(--fs-xs);
+    }
+    
+    .contact-form-wrapper {
+        padding: var(--space-6);
+    }
+    
+    .contact-form-title {
+        font-size: var(--fs-lg);
+        margin-bottom: var(--space-5);
+    }
+    
+    .form-group {
+        gap: var(--space-2);
+    }
+    
+    .form-label {
+        font-size: var(--fs-sm);
+    }
+    
+    .form-input,
+    .form-textarea {
+        padding: var(--space-4);
+        font-size: var(--fs-base);
+        min-height: 48px; /* Better touch targets */
+        /* Prevent zoom on iOS while maintaining accessibility */
+        font-size: max(16px, var(--fs-base));
+    }
+    
+    .form-textarea {
+        min-height: 120px;
+    }
+    
+    .form-submit {
+        margin-top: var(--space-3);
+        width: 100%;
+    }
+}
+
 @media (max-width: 480px) {
+    .contact-info h2 {
+        font-size: var(--fs-xl);
+    }
+    
+    .contact-link {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--space-4);
+    }
+    
+    .contact-link:hover {
+        transform: translateY(-2px);
+    }
+    
+    .contact-form-wrapper {
+        padding: var(--space-5);
+    }
+    
     .footer-content {
         flex-direction: column;
         gap: var(--space-4);
         text-align: center;
+    }
+    
+    .footer-text {
+        font-size: var(--fs-xs);
     }
 }

@@ -204,6 +204,7 @@
     .about-sidebar {
         flex-direction: row;
         flex-wrap: wrap;
+        gap: var(--space-6);
     }
 
     .about-snapshot,
@@ -213,17 +214,93 @@
     }
 }
 
+@media (max-width: 768px) {
+    .about-content {
+        gap: var(--space-8);
+    }
+    
+    .about-intro h2 {
+        font-size: var(--fs-2xl);
+        margin-bottom: var(--space-3);
+    }
+    
+    .about-lead {
+        font-size: var(--fs-lg);
+        line-height: 1.7;
+    }
+    
+    .about-philosophy p {
+        font-size: var(--fs-sm);
+        line-height: 1.8;
+        margin-bottom: var(--space-3);
+    }
+    
+    .about-approach h3 {
+        font-size: var(--fs-base);
+        margin-bottom: var(--space-4);
+    }
+    
+    .approach-cards {
+        gap: var(--space-3);
+    }
+    
+    .approach-card {
+        padding: var(--space-4);
+    }
+    
+    .approach-icon {
+        width: 36px;
+        height: 36px;
+        margin-bottom: var(--space-2);
+    }
+    
+    .approach-card h4 {
+        font-size: var(--fs-sm);
+        margin-bottom: var(--space-2);
+    }
+    
+    .approach-card p {
+        font-size: var(--fs-xs);
+        line-height: 1.7;
+    }
+}
+
 @media (max-width: 640px) {
     .approach-cards {
         grid-template-columns: 1fr;
+        gap: var(--space-3);
     }
 
     .about-sidebar {
         flex-direction: column;
+        gap: var(--space-5);
     }
 
     .about-snapshot,
     .about-quote {
         min-width: auto;
+    }
+    
+    .about-snapshot {
+        padding: var(--space-5);
+    }
+    
+    .about-quote {
+        padding: var(--space-4);
+    }
+    
+    .about-quote blockquote {
+        font-size: var(--fs-sm);
+        line-height: 1.8;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-intro h2 {
+        font-size: var(--fs-xl);
+    }
+    
+    .about-lead {
+        font-size: var(--fs-base);
     }
 }
