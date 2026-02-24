@@ -1,6 +1,6 @@
 .projects {
     background: transparent;
-    overflow: hidden;
+    overflow: hidden !important;
     width: 100%;
     height: 100vh;
     padding-bottom: var(--space-20);
