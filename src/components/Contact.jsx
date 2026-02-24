@@ -1,5 +1,21 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import './Contact.css'
+
+const fadeUpVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+}
+
+const staggerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.15
+        }
+    }
+}
 
 const contactLinks = [
     {
@@ -64,33 +80,47 @@ function Contact() {
             <section className="contact section" id="contact">
                 <div className="container">
                     <div className="contact-content">
-                        <div className="contact-info">
+                        <motion.div 
+                            className="contact-info"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.2 }}
+                            variants={fadeUpVariants}
+                        >
                             <h2>Let's Connect</h2>
                             <p>
                                 I'm currently open to internship and entry-level opportunities.
                                 If you'd like to discuss a project or just say hello, feel free to reach out.
                             </p>
 
-                            <div className="contact-links">
+                            <motion.div className="contact-links" variants={staggerVariants}>
                                 {contactLinks.map((link, index) => (
-                                    <a
+                                    <motion.a
                                         href={link.href}
                                         className="contact-link"
                                         key={index}
                                         target={link.href.startsWith('http') ? '_blank' : undefined}
                                         rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                        variants={fadeUpVariants}
+                                        whileHover={{ y: -5, scale: 1.02 }}
                                     >
                                         <div className="contact-link-icon">{link.icon}</div>
                                         <div className="contact-link-content">
                                             <h4>{link.title}</h4>
                                             <p>{link.value}</p>
                                         </div>
-                                    </a>
+                                    </motion.a>
                                 ))}
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
 
-                        <div className="contact-form-wrapper">
+                        <motion.div 
+                            className="contact-form-wrapper"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.2 }}
+                            variants={fadeUpVariants}
+                        >
                             <h3 className="contact-form-title">Send a Message</h3>
                             <form className="contact-form" onSubmit={handleSubmit}>
                                 <div className="form-group">
@@ -134,15 +164,20 @@ function Contact() {
                                     />
                                 </div>
 
-                                <button type="submit" className="btn btn-primary form-submit">
+                                <motion.button 
+                                    type="submit" 
+                                    className="btn btn-primary form-submit"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                >
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <line x1="22" y1="2" x2="11" y2="13" />
                                         <polygon points="22 2 15 22 11 13 2 9 22 2" />
                                     </svg>
                                     Send Message
-                                </button>
+                                </motion.button>
                             </form>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>

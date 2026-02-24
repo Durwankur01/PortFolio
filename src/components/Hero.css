@@ -5,7 +5,23 @@
     position: relative;
     padding-top: var(--nav-height);
     overflow: hidden;
-    background: radial-gradient(circle at 70% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+    background: transparent;
+}
+
+@keyframes gridPan {
+    0% { background-position: 0 0; opacity: 0.3; }
+    50% { opacity: 0.8; }
+    100% { background-position: 60px 60px; opacity: 0.3; }
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    z-index: 0;
+    pointer-events: none;
+    animation: gridPan 20s linear infinite;
 }
 
 .hero-container {
@@ -36,9 +52,8 @@
     font-size: var(--fs-sm);
     color: var(--accent);
     background: var(--accent-glow);
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    border: 1px solid rgba(96, 165, 250, 0.3);
     border-radius: var(--radius-full);
-    animation: fadeInUp 0.6s ease forwards;
 }
 
 .hero-badge-dot {
@@ -46,20 +61,19 @@
     height: 8px;
     background: var(--accent);
     border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent);
     animation: pulse 2s ease-in-out infinite;
 }
 
 .hero-name {
     font-size: var(--fs-6xl);
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -0.03em;
     margin-bottom: var(--space-4);
     background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: fadeInUp 0.6s ease 0.1s forwards;
-    opacity: 0;
 }
 
 .hero-headline {
@@ -67,12 +81,11 @@
     font-weight: 500;
     color: var(--text-secondary);
     margin-bottom: var(--space-6);
-    animation: fadeInUp 0.6s ease 0.2s forwards;
-    opacity: 0;
 }
 
 .hero-headline span {
     color: var(--accent);
+    text-shadow: 0 0 15px var(--accent-glow);
 }
 
 .hero-description {
@@ -80,16 +93,12 @@
     color: var(--text-muted);
     line-height: 1.8;
     margin-bottom: var(--space-10);
-    animation: fadeInUp 0.6s ease 0.3s forwards;
-    opacity: 0;
 }
 
 .hero-cta {
     display: flex;
     align-items: center;
     gap: var(--space-4);
-    animation: fadeInUp 0.6s ease 0.4s forwards;
-    opacity: 0;
 }
 
 .hero-scroll {

@@ -1,4 +1,20 @@
+import { motion } from 'framer-motion'
 import './Learning.css'
+
+const fadeUpVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+}
+
+const staggerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.15
+        }
+    }
+}
 
 const learningItems = [
     {
@@ -49,27 +65,39 @@ function Learning() {
         <section className="learning section" id="learning">
             <div className="container">
                 <div className="learning-content">
-                    <div className="learning-text">
-                        <h2>What I'm Currently Working On</h2>
-                        <p>
+                    <motion.div 
+                        className="learning-text"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
+                        variants={staggerVariants}
+                    >
+                        <motion.h2 variants={fadeUpVariants}>What I'm Currently Working On</motion.h2>
+                        <motion.p variants={fadeUpVariants}>
                             I believe in continuous improvement. Here's what I'm focused on right now
                             to become a better engineer.
-                        </p>
+                        </motion.p>
 
                         <div className="learning-items">
                             {learningItems.map((item, index) => (
-                                <div className="learning-item" key={index}>
+                                <motion.div variants={fadeUpVariants} className="learning-item" key={index}>
                                     <div className="learning-item-icon">{item.icon}</div>
                                     <div className="learning-item-content">
                                         <h4>{item.title}</h4>
                                         <p>{item.description}</p>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
-                    </div>
+                    </motion.div>
 
-                    <div className="learning-visual">
+                    <motion.div 
+                        className="learning-visual"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
+                        variants={fadeUpVariants}
+                    >
                         <div className="learning-card">
                             <p className="learning-quote">
                                 "The best engineers I know aren't the ones who know everything —
@@ -84,7 +112,7 @@ function Learning() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

@@ -1,4 +1,18 @@
+import { motion } from 'framer-motion'
 import './Skills.css'
+
+const fadeUpVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
+}
+
+const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.1 }
+    }
+}
 
 const skillCategories = [
     {
@@ -64,14 +78,26 @@ function Skills() {
     return (
         <section className="skills section" id="skills">
             <div className="container">
-                <div className="section-header">
+                <motion.div 
+                    className="section-header"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={fadeUpVariants}
+                >
                     <h2 className="section-title">Skills & Tools</h2>
                     <p className="section-subtitle">Grouped by how I think, not by buzzwords</p>
-                </div>
+                </motion.div>
 
-                <div className="skills-grid">
+                <motion.div 
+                    className="skills-grid"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                    variants={staggerContainer}
+                >
                     {skillCategories.map((category) => (
-                        <div className="skill-category" key={category.id} data-category={category.id}>
+                        <motion.div variants={fadeUpVariants} className="skill-category" key={category.id} data-category={category.id}>
                             <div className="skill-category-icon">{category.icon}</div>
                             <h3 className="skill-category-title">{category.title}</h3>
                             <div className="skill-list">
@@ -81,9 +107,9 @@ function Skills() {
                                     </div>
                                 ))}
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     )

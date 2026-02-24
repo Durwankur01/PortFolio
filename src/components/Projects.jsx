@@ -1,4 +1,26 @@
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import './Projects.css'
+
+const fadeUpVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+}
+
+const contentVariants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: { 
+        opacity: 1, 
+        x: 0, 
+        transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.1 } 
+    },
+    exit: { opacity: 0, x: -20, transition: { duration: 0.3 } }
+}
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+}
 
 const projects = [
     {
@@ -112,126 +134,149 @@ const projects = [
 ]
 
 function Projects() {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const activeProject = projects[activeIndex];
+
     return (
         <section className="projects section" id="projects">
             <div className="container">
-                <div className="section-header">
-                    <h2 className="section-title">Projects</h2>
-                    <p className="section-subtitle">
-                        Each project taught me something about building systems — not just shipping features
-                    </p>
-                </div>
+                <motion.div
+                    className="section-header projects-dashboard-header"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={fadeUpVariants}
+                >
+                    <div className="header-text-group">
+                        <h2 className="section-title">Projects Console</h2>
+                        <p className="section-subtitle">
+                            Select a system below to view architectural breakdowns and details
+                        </p>
+                    </div>
+                </motion.div>
 
-                <div className="projects-list">
-                    {projects.map((project, index) => (
-                        <article className="project-card-expanded" key={project.id} data-project={project.id}>
-                            <div className="project-card-header">
-                                <div className="project-number">0{index + 1}</div>
-                                <div className="project-icon-large">{project.icon}</div>
-                                <div className="project-title-block">
-                                    <h3 className="project-title">{project.title}</h3>
-                                    <p className="project-subtitle">{project.subtitle}</p>
+                <div className="projects-dashboard">
+                    {/* LEFT PANEL: Project List */}
+                    <motion.aside 
+                        className="projects-sidebar"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.1 }}
+                        variants={fadeUpVariants}
+                    >
+                        <div className="projects-menu">
+                            {projects.map((project, index) => {
+                                const isActive = index === activeIndex;
+                                return (
+                                    <button 
+                                        key={project.id} 
+                                        className={`project-menu-item ${isActive ? 'active' : ''}`}
+                                        onClick={() => setActiveIndex(index)}
+                                    >
+                                        <div className="menu-item-icon" data-project={project.id}>
+                                            {project.icon}
+                                        </div>
+                                        <div className="menu-item-text">
+                                            <span className="menu-item-id">SYS.0{index + 1}</span>
+                                            <span className="menu-item-title">{project.title}</span>
+                                        </div>
+                                        {isActive && (
+                                            <motion.div 
+                                                className="menu-item-indicator" 
+                                                layoutId="activeIndicator" 
+                                            />
+                                        )}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </motion.aside>
+
+                    {/* RIGHT PANEL: Project Details */}
+                    <div className="projects-content-area">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={activeProject.id}
+                                className="project-detail-view"
+                                data-project={activeProject.id}
+                                variants={contentVariants}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                            >
+                                <motion.div variants={itemVariants} className="detail-header">
+                                    <h3 className="detail-title">{activeProject.title}</h3>
+                                    <p className="detail-subtitle">{activeProject.subtitle}</p>
+                                    <div className="detail-tech-stack">
+                                        {activeProject.tech.map((tech, i) => (
+                                            <span className="tech-badge" key={i}>{tech}</span>
+                                        ))}
+                                    </div>
+                                </motion.div>
+
+                                <div className="detail-grid">
+                                    {/* Left Column in Detail Pane */}
+                                    <div className="detail-col-main">
+                                        <motion.div variants={itemVariants} className="detail-section">
+                                            <h4 className="detail-section-title">The Problem</h4>
+                                            <p className="detail-text">{activeProject.problem}</p>
+                                        </motion.div>
+
+                                        <motion.div variants={itemVariants} className="detail-section">
+                                            <h4 className="detail-section-title">Architecture Flow</h4>
+                                            <div className="architecture-flow-box">
+                                                <code>{activeProject.architecture.flow}</code>
+                                            </div>
+                                            <div className="architecture-layers-list">
+                                                {activeProject.architecture.layers.map((layer, i) => (
+                                                    <div className="layer-row" key={i}>
+                                                        <strong>{layer.name}</strong>
+                                                        <span>{layer.detail}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+
+                                        <motion.div variants={itemVariants} className="detail-section">
+                                            <h4 className="detail-section-title">Key Decisions</h4>
+                                            <ul className="detail-list">
+                                                {activeProject.decisions.map((decision, i) => (
+                                                    <li key={i}>{decision}</li>
+                                                ))}
+                                            </ul>
+                                        </motion.div>
+                                    </div>
+
+                                    {/* Right Column in Detail Pane */}
+                                    <div className="detail-col-side">
+                                        <motion.div variants={itemVariants} className="detail-section detail-highlight">
+                                            <h4 className="detail-section-title text-warn">Trade-offs</h4>
+                                            <p className="detail-text">{activeProject.tradeoffs}</p>
+                                        </motion.div>
+
+                                        <motion.div variants={itemVariants} className="detail-section">
+                                            <h4 className="detail-section-title">Core Features</h4>
+                                            <ul className="detail-list feature-list">
+                                                {activeProject.features.map((feature, i) => (
+                                                    <li key={i}>{feature}</li>
+                                                ))}
+                                            </ul>
+                                        </motion.div>
+
+                                        <motion.div variants={itemVariants} className="detail-section detail-learning">
+                                            <h4 className="detail-section-title">What I Learned</h4>
+                                            <p className="detail-text">{activeProject.learnings}</p>
+                                        </motion.div>
+
+                                        <motion.div variants={itemVariants} className="detail-section detail-future">
+                                            <h4 className="detail-section-title">Next Steps</h4>
+                                            <p className="detail-text">{activeProject.futureScope}</p>
+                                        </motion.div>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div className="project-card-content">
-                                <div className="project-main">
-                                    {/* Problem */}
-                                    <div className="project-section">
-                                        <h4 className="project-section-title">
-                                            <span className="section-icon">◆</span>
-                                            The Problem
-                                        </h4>
-                                        <p>{project.problem}</p>
-                                    </div>
-
-                                    {/* Architecture */}
-                                    <div className="project-section">
-                                        <h4 className="project-section-title">
-                                            <span className="section-icon">◆</span>
-                                            Architecture
-                                        </h4>
-                                        <p className="architecture-summary">{project.architecture.description}</p>
-                                        <div className="architecture-flow">
-                                            <code>{project.architecture.flow}</code>
-                                        </div>
-                                        <div className="architecture-layers">
-                                            {project.architecture.layers.map((layer, i) => (
-                                                <div className="architecture-layer" key={i}>
-                                                    <span className="layer-name">{layer.name}</span>
-                                                    <span className="layer-detail">{layer.detail}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Key Decisions */}
-                                    <div className="project-section">
-                                        <h4 className="project-section-title">
-                                            <span className="section-icon">◆</span>
-                                            Key Decisions
-                                        </h4>
-                                        <ul className="decisions-list">
-                                            {project.decisions.map((decision, i) => (
-                                                <li key={i}>{decision}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-
-                                    {/* Trade-offs */}
-                                    <div className="project-section tradeoffs-section">
-                                        <h4 className="project-section-title">
-                                            <span className="section-icon tradeoff-icon">⚖</span>
-                                            Trade-offs
-                                        </h4>
-                                        <p>{project.tradeoffs}</p>
-                                    </div>
-                                </div>
-
-                                <div className="project-sidebar">
-                                    {/* Features */}
-                                    <div className="project-section">
-                                        <h4 className="project-section-title">Features</h4>
-                                        <div className="project-features">
-                                            {project.features.map((feature, i) => (
-                                                <div className="project-feature" key={i}>
-                                                    <span className="project-feature-dot"></span>
-                                                    <span>{feature}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Tech Stack */}
-                                    <div className="project-section">
-                                        <h4 className="project-section-title">Tech Stack</h4>
-                                        <div className="project-tech">
-                                            {project.tech.map((tech, i) => (
-                                                <span className="project-tech-tag" key={i}>{tech}</span>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Learnings */}
-                                    <div className="project-learnings">
-                                        <h4 className="project-learnings-title">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
-                                            </svg>
-                                            What I Learned
-                                        </h4>
-                                        <p>{project.learnings}</p>
-                                    </div>
-
-                                    {/* Future Scope */}
-                                    <div className="project-future">
-                                        <h4 className="project-future-title">Next Steps</h4>
-                                        <p>{project.futureScope}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    ))}
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
                 </div>
             </div>
         </section>

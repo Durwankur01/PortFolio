@@ -1,7 +1,31 @@
 import { Suspense, lazy } from 'react'
+import { motion } from 'framer-motion'
 import './Hero.css'
 
 const SystemFlow = lazy(() => import('./SystemFlow'))
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.15,
+            delayChildren: 0.2
+        }
+    }
+}
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+        opacity: 1, 
+        y: 0,
+        transition: {
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1]
+        }
+    }
+}
 
 function Hero() {
     const handleNavClick = (e, targetId) => {
@@ -15,25 +39,30 @@ function Hero() {
     return (
         <section className="hero" id="hero">
             <div className="hero-container">
-                <div className="hero-content">
-                    <div className="hero-badge">
+                <motion.div 
+                    className="hero-content"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                >
+                    <motion.div variants={itemVariants} className="hero-badge">
                         <span className="hero-badge-dot"></span>
                         Open to Opportunities
-                    </div>
+                    </motion.div>
 
-                    <h1 className="hero-name">Durwankur Motiwale</h1>
+                    <motion.h1 variants={itemVariants} className="hero-name">Durwankur Motiwale</motion.h1>
 
-                    <p className="hero-headline">
+                    <motion.p variants={itemVariants} className="hero-headline">
                         Software Developer · <span>Backend-Inclined</span> · DSA-Focused
-                    </p>
+                    </motion.p>
 
-                    <p className="hero-description">
+                    <motion.p variants={itemVariants} className="hero-description">
                         I build software by understanding systems first — how data flows,
                         where complexity hides, and why certain designs scale better than others.
                         Currently sharpening my fundamentals through daily practice.
-                    </p>
+                    </motion.p>
 
-                    <div className="hero-cta">
+                    <motion.div variants={itemVariants} className="hero-cta">
                         <a
                             href="#projects"
                             className="btn btn-primary"
@@ -55,8 +84,8 @@ function Hero() {
                             </svg>
                             Get in Touch
                         </a>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
 
                 <Suspense fallback={null}>
                     <SystemFlow />
