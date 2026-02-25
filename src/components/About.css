@@ -1,9 +1,9 @@
 .about {
     background: transparent;
     position: relative;
-    overflow: hidden;
+    overflow: hidden !important;
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
 }
 
 .about::before {

@@ -210,18 +210,15 @@ p {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--space-6);
-  /* Prevent horizontal overflow */
-  overflow-x: hidden;
 }
 
 /* Section */
 .section {
   padding: var(--space-24) 0;
   width: 100%;
-  min-height: 100vh;
-  height: auto;
-  /* Prevent internal scrollbars while allowing page to scroll */
-  overflow: hidden;
+  height: 100vh;
+  /* Prevent any scrollbars */
+  overflow: hidden !important;
   position: relative;
   scroll-snap-align: start;
 }
@@ -423,8 +420,6 @@ p {
   }
 
   /* Prevent horizontal scrolling */
-  .container,
-  .section,
   .card,
   .project-card-expanded,
   .project-card-content,
@@ -432,6 +427,11 @@ p {
   .project-sidebar {
     max-width: 100%;
     overflow-x: hidden;
+  }
+  
+  .container,
+  .section {
+    max-width: 100%;
   }
 
   /* Better mobile typography */
