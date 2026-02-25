@@ -220,9 +220,10 @@ p {
   width: 100%;
   min-height: 100vh;
   height: auto;
-  /* Prevent horizontal overflow */
-  overflow: visible;
+  /* Prevent internal scrollbars while allowing page to scroll */
+  overflow: hidden;
   position: relative;
+  scroll-snap-align: start;
 }
 
 .section-header {
