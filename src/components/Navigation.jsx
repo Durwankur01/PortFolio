@@ -80,6 +80,15 @@ function Navigation() {
             Learning
           </a>
           <a
+            href="/DurwankurMotiwale_CV.pdf"
+            className="nav-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Resume
+          </a>
+          <a
             href="#contact"
             className="nav-cta"
             onClick={(e) => handleNavClick(e, "contact")}
