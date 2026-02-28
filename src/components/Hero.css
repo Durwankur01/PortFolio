@@ -100,6 +100,7 @@
     display: flex;
     align-items: center;
     gap: var(--space-4);
+    flex-wrap: wrap;
 }
 
 .hero-scroll {
@@ -151,9 +152,10 @@
 @media (max-width: 768px) {
     .hero {
         padding-top: calc(var(--nav-height) + var(--space-6));
-        height: 100vh;
+        height: auto;
+        min-height: 100vh;
         width: 100%;
-        overflow: hidden !important;
+        overflow: visible !important;
     }
     
     .hero-container {
