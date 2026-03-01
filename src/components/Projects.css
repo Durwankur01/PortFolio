@@ -99,22 +99,22 @@
 }
 
 .project-menu-item.active .menu-item-icon {
-    color: var(--accent);
-    border-color: rgba(96, 165, 250, 0.3);
-    background: rgba(96, 165, 250, 0.05);
+    color: var(--project-color);
+    border-color: color-mix(in srgb, var(--project-color), transparent 70%);
+    background: color-mix(in srgb, var(--project-color), transparent 95%);
 }
 
-.project-menu-item.active .menu-item-icon[data-project="petguard"] {
-    color: #10b981;
-    border-color: rgba(16, 185, 129, 0.3);
-    background: rgba(16, 185, 129, 0.05);
+.project-menu-item.active {
+    background: var(--bg-card);
+    border-color: color-mix(in srgb, var(--project-color), transparent 80%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 15px color-mix(in srgb, var(--project-color), transparent 90%);
 }
 
-.project-menu-item.active .menu-item-icon[data-project="gyansetu"] {
-    color: #f59e0b;
-    border-color: rgba(245, 158, 11, 0.3);
-    background: rgba(245, 158, 11, 0.05);
+.project-menu-item.active .menu-item-title {
+    color: var(--project-color);
 }
+
+/* Dynamic color handling removed hardcoded ones */
 
 .menu-item-text {
     display: flex;
@@ -186,7 +186,7 @@
     font-size: var(--fs-4xl);
     font-weight: 700;
     margin-bottom: var(--space-2);
-    background: linear-gradient(90deg, #fff, #a1a1aa);
+    background: linear-gradient(90deg, #fff, var(--active-color));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;

@@ -27,6 +27,7 @@ const projects = [
         id: 'aura',
         title: 'Aura',
         subtitle: 'Generative AI Platform for Interview Preparation',
+        color: '#60a5fa', // Blue
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2a10 10 0 1 0 10 10H12V2z" />
@@ -64,6 +65,7 @@ const projects = [
         id: 'petguard',
         title: 'PetGuard',
         subtitle: 'Smart Pet Fitness Belt & Companion App',
+        color: '#10b981', // Emerald
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
@@ -99,6 +101,7 @@ const projects = [
         id: 'gyansetu',
         title: 'GyanSetu',
         subtitle: 'Exploring Cultural Roots & Knowledge',
+        color: '#f59e0b', // Amber
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
@@ -135,6 +138,7 @@ const projects = [
         id: 'cuda-hpc',
         title: 'GPU Parallel Reduction Engine (CUDA)',
         subtitle: 'C++, CUDA, Parallel Computing',
+        color: '#818cf8', // Indigo
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="2" ry="2" />
@@ -180,6 +184,7 @@ const projects = [
         id: 'mern-nexus',
         title: 'Full-Stack MERN E-Commerce Platform',
         subtitle: 'React 19, Node.js, Express, MongoDB, Tailwind CSS, Vite',
+        color: '#22d3ee', // Cyan
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
@@ -254,6 +259,7 @@ function Projects() {
                                         key={project.id} 
                                         className={`project-menu-item ${isActive ? 'active' : ''}`}
                                         onClick={() => setActiveIndex(index)}
+                                        style={{ '--project-color': project.color }}
                                     >
                                         <div className="menu-item-icon" data-project={project.id}>
                                             {project.icon}
@@ -266,6 +272,10 @@ function Projects() {
                                             <motion.div 
                                                 className="menu-item-indicator" 
                                                 layoutId="activeIndicator" 
+                                                style={{ 
+                                                    background: project.color,
+                                                    boxShadow: `0 0 15px ${project.color}aa`
+                                                }}
                                             />
                                         )}
                                     </button>
@@ -285,16 +295,28 @@ function Projects() {
                                 initial="hidden"
                                 animate="visible"
                                 exit="exit"
+                                style={{ '--active-color': activeProject.color }}
                             >
                                 <motion.div variants={itemVariants} className="detail-header">
                                     <h3 className="detail-title">{activeProject.title}</h3>
                                     <p className="detail-subtitle">{activeProject.subtitle}</p>
                                     <div className="detail-tech-stack">
                                         {activeProject.tech.map((tech, i) => (
-                                            <span className="tech-badge" key={i}>{tech}</span>
+                                            <span 
+                                                className="tech-badge" 
+                                                key={i}
+                                                style={{ 
+                                                    borderColor: `${activeProject.color}33`,
+                                                    background: `${activeProject.color}11`,
+                                                    color: activeProject.color 
+                                                }}
+                                            >
+                                                {tech}
+                                            </span>
                                         ))}
                                     </div>
                                 </motion.div>
+
 
                                 <div className="detail-grid">
                                     {/* Left Column in Detail Pane */}
