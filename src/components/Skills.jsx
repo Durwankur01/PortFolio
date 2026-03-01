@@ -24,7 +24,7 @@ const skillCategories = [
                 <polyline points="8 6 2 12 8 18" />
             </svg>
         ),
-        skills: ['C++', 'Python', 'JavaScript', 'TypeScript', 'SQL', 'CUDA']
+        skills: ['C++', 'Python', 'Java', 'JavaScript', 'TypeScript', 'CUDA']
     },
     {
         id: 'backend',
@@ -37,7 +37,7 @@ const skillCategories = [
                 <line x1="6" y1="18" x2="6.01" y2="18" />
             </svg>
         ),
-        skills: ['FastAPI', 'Node.js', 'Express', 'REST APIs']
+        skills: ['FastAPI', 'Node.js', 'Express', 'Tailwind CSS', 'REST APIs']
     },
     {
         id: 'databases',
@@ -49,7 +49,7 @@ const skillCategories = [
                 <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
             </svg>
         ),
-        skills: ['PostgreSQL', 'MongoDB', 'Supabase', 'Redis']
+        skills: ['PostgreSQL', 'MongoDB', 'MySQL', 'Supabase', 'Firebase']
     },
     {
         id: 'tools',

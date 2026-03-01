@@ -133,8 +133,8 @@ const projects = [
     },
     {
         id: 'cuda-hpc',
-        title: 'CUDA HPC',
-        subtitle: 'Parallel Matrix Operations & Image Processing',
+        title: 'GPU Parallel Reduction Engine (CUDA)',
+        subtitle: 'C++, CUDA, Parallel Computing',
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="2" ry="2" />
@@ -150,36 +150,36 @@ const projects = [
                 <path d="M14 18v4" />
             </svg>
         ),
-        problem: 'Scientific computing and high-resolution image processing often exceed the capabilities of sequential CPU processing, leading to significant latency in data-intensive tasks.',
+        problem: 'Efficiently summing or aggregating large datasets (like image pixel values or physics simulations) on sequential hardware is slow. This project explores high-throughput parallel aggregation.',
         architecture: {
-            description: 'SIMT (Single Instruction, Multiple Threads) architecture leveraging thousands of GPU cores.',
-            flow: 'C++ App → CUDA Kernel → Global Memory → Shared Memory → Thread Execution',
+            description: 'Implementation of a tree-structured reduction algorithm for logarithmic time complexity.',
+            flow: 'Global Array → Shared Memory Blocks → Tree Reduction → Synchronized Atomic Addition',
             layers: [
-                { name: 'Host Layer', detail: 'C++ application managing data loading and device allocation' },
-                { name: 'Memory Pipeline', detail: 'Pinned memory and streams for asynchronous data transfers' },
-                { name: 'Kernel Layer', detail: 'Custom CUDA kernels optimized for coalesced memory access' }
+                { name: 'Memory Strategy', detail: 'Using CUDA shared memory to reduce global memory traffic' },
+                { name: 'Sync Layer', detail: 'Explicit thread synchronization using __syncthreads()' },
+                { name: 'Comparison', detail: 'Benchmarking CPU sequential sum vs GPU parallel reduction' }
             ]
         },
         decisions: [
-            'Used shared memory tiles to minimize global memory bandwidth bottlenecks',
-            'Implemented warp-level primitives for faster reductions',
-            'Chose C++ over Python wrappers for maximum control over memory layout'
+            'Implemented a tree-based reduction to minimize idle threads in the warp',
+            'Used pointer jumping and loop unrolling for maximum instruction throughput',
+            'Chose shared memory over global memory for block-level intermediate sums'
         ],
-        tradeoffs: 'Manual memory management increases complexity and development time compared to high-level libraries, but offers superior performance for specific algorithms.',
+        tradeoffs: 'Shared memory has a limited size per SM; managed this by carefully batching thread blocks to prevent overflows.',
         features: [
-            'Parallel Matrix Multiplication (Tiled)',
-            'Gaussian Noise Reduction Filter',
-            'Sobel Edge Detection Kernels',
-            'Asynchronous stream processing for overlapping transfers'
+            'Tree-based GPU parallel reduction algorithm',
+            'CPU vs GPU execution benchmarking suite',
+            'Memory latency and sync overhead measurement',
+            'Exploration of SIMT execution and thread blocks'
         ],
-        tech: ['CUDA', 'C++', 'NVIDIA GPU', 'Parallel Computing', 'Linear Algebra'],
-        learnings: 'Deepened my understanding of hardware-level constraints, specifically how memory alignment and thread divergence can make orders-of-magnitude difference in performance.',
-        futureScope: 'Implement multi-GPU support using NCCL and expand to real-time video stream processing.'
+        tech: ['CUDA', 'C++', 'Parallel Computing', 'SIMT', 'NVIDIA GPU'],
+        learnings: 'Mastered the nuances of thread synchronization and learned how to exploit the SIMT architecture to achieve significant throughput gains over sequential processing.',
+        futureScope: 'Optimize further with shuffle instructions to eliminate shared memory bank conflicts.'
     },
     {
         id: 'mern-nexus',
-        title: 'MERN Nexus',
-        subtitle: 'Full-Stack E-commerce Ecosystem',
+        title: 'Full-Stack MERN E-Commerce Platform',
+        subtitle: 'React 19, Node.js, Express, MongoDB, Tailwind CSS, Vite',
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
@@ -187,31 +187,31 @@ const projects = [
                 <path d="M16 10a4 4 0 0 1-8 0" />
             </svg>
         ),
-        problem: 'Modern shoppers expect seamless, real-time updates and secure transactions. Building a platform that balances fast load times with consistent data across catalog, cart, and orders is a major challenge.',
+        problem: 'Building a scalable, production-ready commerce platform requires balancing complex business rules like admin approvals, secure payments, and role-based access control.',
         architecture: {
-            description: 'Full-stack MERN application with centralized state management and secure auth.',
-            flow: 'React/Redux → Express/JWT → Node.js Runtime → MongoDB Atlas',
+            description: 'Production-style MERN ecosystem with JWT security and middleware validation.',
+            flow: 'React 19 Frontend → Express Validator → Node.js Middleware → MongoDB Atlas',
             layers: [
-                { name: 'Frontend', detail: 'React with Redux Toolkit for complex cart state and product filtering' },
-                { name: 'Auth Service', detail: 'JWT-based authentication with bcrypt hashing and refresh tokens' },
-                { name: 'Data Store', detail: 'MongoDB with Mongoose schemas for orders, products, and users' }
+                { name: 'Security', detail: 'JWT-based auth with Helmet and express-validator protection' },
+                { name: 'API Layer', detail: 'RESTful API with 15+ endpoints for products, orders, and users' },
+                { name: 'Auth Workflow', detail: 'RBAC system with Super-Admin approval for seller accounts' }
             ]
         },
         decisions: [
-            'Used Redux Toolkit for cart state to ensure UI consistency across multiple components',
-            'Implemented custom middleware for role-based route protection (Admin vs. User)',
-            'Chose MongoDB Atlas for horizontal scalability to handle traffic spikes'
+            'Selected React 19 for the latest performance improvements and concurrent features',
+            'Implemented custom Redux toolkit logic for complex cart state management',
+            'Stored high-resolution product images using a scalable storage solution'
         ],
-        tradeoffs: 'Client-side state management adds complexity but creates a "snappy" app feel by avoiding full-page reloads for cart updates.',
+        tradeoffs: 'Used complex validation middleware which slightly increased latency but significantly improved data integrity and security.',
         features: [
-            'Dynamic Product Catalog with advanced filtering',
-            'Secure User Authentication & Profile Management',
-            'Real-time Cart synchronization',
-            'Admin Dashboard for inventory and order tracking'
+            'Role-Based Access Control (RBAC)',
+            'Super-Admin account and order approval workflow',
+            'REST API with 15+ secured endpoints',
+            'Interactive onboarding tour for enhanced UX'
         ],
-        tech: ['MongoDB', 'Express', 'React', 'Node.js', 'Redux Toolkit', 'JWT'],
-        learnings: 'Mastered the flow of token-based authentication and learned how to structure large-scale React applications using the "feature-based" folder pattern.',
-        futureScope: 'Integrate Stripe/Razorpay for actual payments, implement product recommendations using simple collaborative filtering.'
+        tech: ['MongoDB', 'Express', 'React 19', 'Node.js', 'Tailwind CSS', 'Vite'],
+        learnings: 'Learned how to design complex workflows like Super-Admin approvals and mastered securing multi-endpoint APIs using standard security practices.',
+        futureScope: 'Implement full offline support with Service Workers and add real-time inventory alerts.'
     }
 ]
 
